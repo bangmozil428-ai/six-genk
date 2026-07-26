@@ -2,97 +2,102 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"> <!-- INI PENTING BIAR GAK KECIL -->
 <title>SIX GENK | Dashboard</title>
 <style>
-  body{margin:0; font-family:'Arial'; background:#0a0a0a; color:#eee}
+  *{box-sizing:border-box}
+  body{margin:0; font-family:'Arial'; background:#0a0a0a; color:#eee; font-size:16px} /* font gedein */
   
   /* LOGIN */
-  #loginBox{background:#111; width:320px; margin:100px auto; padding:30px; border-radius:15px; border:2px solid #8b5cf6; text-align:center}
-  #loginBox h1{color:#8b5cf6}
-  input, textarea{width:90%; padding:12px; margin:10px 0; background:#000; border:1px solid #333; border-radius:8px; color:white}
-  .btn-login{background:#8b5cf6; color:white; padding:12px; border:none; border-radius:8px; cursor:pointer; width:95%; font-weight:bold}
-  .error{color:red; display:none}
+  #loginBox{background:#111; width:90%; max-width:400px; margin:50px auto; padding:25px; border-radius:15px; border:2px solid #8b5cf6; text-align:center}
+  input, textarea{width:100%; padding:14px; font-size:16px; margin:10px 0; background:#000; border:1px solid #333; border-radius:8px; color:white}
+  .btn-login{background:#8b5cf6; color:white; padding:14px; border:none; border-radius:8px; cursor:pointer; width:100%; font-weight:bold; font-size:16px}
   
   /* DASHBOARD */
   #dashboard{display:none; background:linear-gradient(135deg,#1e1b4b,#7c3aed,#ec4899); min-height:100vh}
-  header{background:rgba(0,0,0,0.3); padding:15px 20px; display:flex; justify-content:space-between; backdrop-filter:blur(10px)}
-  .logo{background:#8b5cf6; padding:10px 20px; border-radius:15px; font-weight:bold}
-  .logout{background:#ef4444; color:white; border:none; padding:8px 15px; border-radius:8px; cursor:pointer}
+  header{padding:12px 15px; display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.4)}
+  .logo{padding:8px 15px; border-radius:12px; font-size:16px}
+  .logout{padding:8px 15px; font-size:14px}
   
-  .container{max-width:1000px; margin:auto; padding:20px}
-  .banner{background:url('https://i.imgur.com/3wYkZbP.jpg') center/cover; height:200px; border-radius:15px; margin-bottom:20px}
+  .container{padding:15px} /* padding dikecilin buat hp */
+  
+  .banner{height:180px; border-radius:15px; margin-bottom:15px}
+  
+  /* SAPAAN GEDE */
+  h2{font-size:22px; margin:10px 0}
   
   /* PROFIL */
-  .profile-card{background:rgba(0,0,0,0.4); backdrop-filter:blur(10px); padding:20px; border-radius:15px; display:flex; align-items:center; gap:15px; border:1px solid rgba(139,92,246,0.3)}
-  .avatar{width:60px; height:60px; border-radius:50%; background:linear-gradient(135deg,#8b5cf6,#ec4899); display:flex; align-items:center; justify-content:center; font-size:30px; border:3px solid white}
+  .profile-card{padding:15px; border-radius:15px; display:flex; align-items:center; gap:12px; background:rgba(0,0,0,0.4)}
+  .avatar{width:50px; height:50px; font-size:24px}
+  .profile-info b{font-size:18px}
   
   /* AGENDA */
-  .agenda{background:rgba(0,0,0,0.4); padding:20px; border-radius:15px; margin:20px 0; border:1px solid #ec4899}
-  .agenda h3{color:#ec4899; margin-top:0}
-  .agenda-item{background:#222; padding:10px; border-radius:8px; margin:8px 0; display:flex; justify-content:space-between}
+  .agenda{padding:15px; border-radius:15px; margin:15px 0}
+  .agenda h3{font-size:18px}
+  .agenda-item{font-size:15px; padding:12px}
   
-  /* GALERI */
-  .galeri{display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px; margin-top:20px}
-  .foto{background:rgba(0,0,0,0.4); padding:12px; border-radius:15px; position:relative}
-  .foto img{width:100%; border-radius:10px}
-  .caption{margin-top:8px; font-size:14px}
-  .caption b{color:#ec4899}
-  .hapus{position:absolute; top:5px; right:5px; background:red; color:white; border:none; border-radius:50%; width:25px; height:25px; cursor:pointer; display:none}
+  /* GALERI FULL WIDTH */
+  .galeri{display:grid; grid-template-columns:1fr; gap:15px; margin-top:15px} /* 1 kolom di HP */
+  .foto{padding:12px; border-radius:15px; background:rgba(0,0,0,0.4)}
+  .foto img{width:100%; border-radius:10px; min-height:200px; object-fit:cover} /* FOTO GEDE */
+  .caption{font-size:15px; margin-top:8px}
+  .caption b{font-size:16px}
   
-  /* FORM ADMIN */
-  .admin-panel{background:rgba(0,0,0,0.5); padding:20px; border-radius:15px; margin:20px 0; border:2px dashed #8b5cf6; display:none}
-  .btn-tambah{background:#10b981; color:white; padding:10px 20px; border:none; border-radius:8px; cursor:pointer; margin:5px}
+  .btn-hapus{width:32px; height:32px; font-size:16px}
+  .admin-panel{padding:15px}
+  .btn-tambah{width:100%; padding:14px; font-size:16px}
+  
+  /* TABLET/PC BARU 2 KOLOM */
+  @media(min-width:768px){
+    .galeri{grid-template-columns:repeat(2,1fr)}
+  }
 </style>
 </head>
 <body>
 
 <!-- LOGIN -->
 <div id="loginBox">
-  <h1>🔒 SIX GENK 🔒</h1>
+  <h1 style="color:#8b5cf6">🔒 SIX GENK 🔒</h1>
   <input type="text" id="user" placeholder="Username">
   <input type="password" id="pass" placeholder="Password">
   <button class="btn-login" onclick="login()">MASUK</button>
-  <p class="error" id="error">Username atau Password Salah!</p>
+  <p class="error" id="error" style="color:red; display:none">Username atau Password Salah!</p>
 </div>
 
 <!-- DASHBOARD -->
 <div id="dashboard">
   <header>
-    <div class="logo">SIX GENK</div>
-    <button class="logout" onclick="logout()">LOGOUT</button>
+    <div class="logo" style="background:#8b5cf6; color:white">SIX GENK</div>
+    <button class="logout" style="background:#ef4444; color:white; border:none; border-radius:8px" onclick="logout()">LOGOUT</button>
   </header>
-  
     
-    <!-- SAPAAN OTOMATIS -->
     <h2 id="sapaan">🌙 Good Evening, User!</h2>
     
     <div class="profile-card">
-      <div class="avatar">👤</div>
-      <div>
+      <div class="avatar" style="background:linear-gradient(135deg,#8b5cf6,#ec4899); color:white">👤</div>
+      <div class="profile-info">
         <b id="namaProfile">@User</b>
         <p id="status">Member</p>
         <p id="waktu">--:-- --/--/----</p>
       </div>
     </div>
     
-    <!-- AGENDA -->
     <div class="agenda">
-      <h3>📅 Agenda Selanjutnya</h3>
+      <h3 style="color:#ec4899">📅 Agenda Selanjutnya</h3>
       <div id="listAgenda"></div>
-      <div id="formAgenda" class="admin-panel">
+      <div id="formAgenda" class="admin-panel" style="display:none; border:2px dashed #8b5cf6; margin-top:10px">
         <input type="text" id="judulAgenda" placeholder="Judul Agenda">
         <input type="date" id="tanggalAgenda">
-        <button class="btn-tambah" onclick="tambahAgenda()">+ Tambah Agenda</button>
+        <button class="btn-tambah" style="background:#10b981" onclick="tambahAgenda()">+ Tambah Agenda</button>
       </div>
     </div>
     
-    <!-- GALERI -->
-    <h3>📸 Galeri Six Genk</h3>
-    <div id="formGaleri" class="admin-panel">
+    <h3 style="margin-top:20px">📸 Galeri Six Genk</h3>
+    <div id="formGaleri" class="admin-panel" style="display:none; border:2px dashed #8b5cf6">
       <input type="text" id="judulFoto" placeholder="Judul Foto">
-      <input type="text" id="linkFoto" placeholder="Link Foto">
+      <input type="text" id="linkFoto" placeholder="Link Foto dari imgbb">
       <textarea id="captionFoto" placeholder="Caption"></textarea>
-      <button class="btn-tambah" onclick="tambahFoto()">+ Tambah Foto</button>
+      <button class="btn-tambah" style="background:#10b981" onclick="tambahFoto()">+ Tambah Foto</button>
     </div>
     <div class="galeri" id="listGaleri"></div>
     
@@ -102,16 +107,11 @@
 <script>
 let currentUser = "";
 let isAdmin = false;
-
-// DATA SIMPAN DI BROWSER
 let dataGaleri = JSON.parse(localStorage.getItem('galeriSixGenk')) || [
   {judul:"BW / Banyu Wangi", link:"https://ar-hosting.pages.dev/1785080606233.jpg", caption:"Yang penting basah bareng"}
 ];
-let dataAgenda = JSON.parse(localStorage.getItem('agendaSixGenk')) || [
-  {judul:"Nongkrong Six Genk", tanggal:"2026-08-01"}
-];
+let dataAgenda = JSON.parse(localStorage.getItem('agendaSixGenk')) || [];
 
-// AKUN
 const akun = [
   {user:"Rizky", pass:"admin"},
   {user:"izad", pass:"izad123"},
@@ -128,29 +128,24 @@ function login(){
   
   if(cek){
     currentUser = cek.user;
-    isAdmin = (cek.user === "Rizky"); // HANYA RIZKY ADMIN
+    isAdmin = (cek.user === "Rizky");
     
     document.getElementById("loginBox").style.display = "none";
     document.getElementById("dashboard").style.display = "block";
     
-    // SET PROFIL
     document.getElementById("namaProfile").innerText = "@" + cek.user;
     document.getElementById("status").innerText = isAdmin ? "Admin" : "Member";
     
-    // SAPAAN BERDASAR WAKTU
     let jam = new Date().getHours();
     let sapa = jam < 11 ? "Good Morning" : jam < 15 ? "Good Afternoon" : jam < 18 ? "Good Evening" : "Good Night";
     document.getElementById("sapaan").innerText = `🌙 ${sapa}, ${cek.user}!`;
     
-    // WAKTU
     let now = new Date();
     document.getElementById("waktu").innerText = now.toLocaleTimeString() + " • " + now.toLocaleDateString();
     
-    // TAMPILKAN FORM ADMIN KALO RIZKY
     if(isAdmin){
       document.getElementById("formGaleri").style.display = "block";
       document.getElementById("formAgenda").style.display = "block";
-      document.querySelectorAll('.hapus').forEach(b => b.style.display = 'block');
     }
     
     loadGaleri();
@@ -160,17 +155,14 @@ function login(){
   }
 }
 
-function logout(){
-  location.reload();
-}
+function logout(){ location.reload(); }
 
-// GALERI
 function loadGaleri(){
   let html = "";
   dataGaleri.forEach((g,i) => {
     html += `
     <div class="foto">
-      ${isAdmin ? `<button class="hapus" onclick="hapusFoto(${i})">x</button>` : ""}
+      ${isAdmin ? `<button class="btn-hapus" style="position:absolute; background:red; color:white; border:none; border-radius:50%" onclick="hapusFoto(${i})">X</button>` : ""}
       <img src="${g.link}" alt="${g.judul}">
       <div class="caption"><b>${g.judul}</b><br>${g.caption}</div>
     </div>`;
@@ -193,18 +185,19 @@ function tambahFoto(){
 }
 
 function hapusFoto(i){
-  dataGaleri.splice(i,1);
-  localStorage.setItem('galeriSixGenk', JSON.stringify(dataGaleri));
-  loadGaleri();
+  if(confirm("Yakin mau hapus foto ini?")){
+    dataGaleri.splice(i,1);
+    localStorage.setItem('galeriSixGenk', JSON.stringify(dataGaleri));
+    loadGaleri();
+  }
 }
 
-// AGENDA
 function loadAgenda(){
   let html = "";
   dataAgenda.forEach((a,i) => {
-    html += `<div class="agenda-item">
+    html += `<div class="agenda-item" style="background:#222; margin:8px 0; display:flex; justify-content:space-between">
       <span><b>${a.judul}</b> - ${a.tanggal}</span>
-      ${isAdmin ? `<button onclick="hapusAgenda(${i})" style="background:red;border:none;color:white;border-radius:5px">x</button>` : ""}
+      ${isAdmin ? `<button style="background:red; color:white; border:none; border-radius:5px" onclick="hapusAgenda(${i})">x</button>` : ""}
     </div>`;
   });
   document.getElementById("listAgenda").innerHTML = html;
